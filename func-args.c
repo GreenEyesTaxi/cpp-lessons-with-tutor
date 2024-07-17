@@ -34,7 +34,7 @@ double f_ptr(struct data *input) {
 	return res;
 }
 
-double f_ptr(double a, double b, double c, double k, double w, double x, double y, double z) {
+double f_sep(double a, double b, double c, double k, double w, double x, double y, double z) {
 	double res;
 	res =  a;
 	res += b;
