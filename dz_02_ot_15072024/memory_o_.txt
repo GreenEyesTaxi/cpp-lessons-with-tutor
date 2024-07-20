@@ -1,0 +1,54 @@
+memory.o:     формат файла elf64-x86-64
+
+
+Дизассемблирование раздела .text:
+
+0000000000000000 <main>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	48 83 ec 20          	sub    $0x20,%rsp
+   c:	48 c7 45 e8 64 00 00 	movq   $0x64,-0x18(%rbp)
+  13:	00 
+  14:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  18:	48 89 c7             	mov    %rax,%rdi
+  1b:	e8 00 00 00 00       	call   20 <main+0x20>
+  20:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+  24:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+  2b:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 32 <main+0x32>
+  32:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  36:	89 c1                	mov    %eax,%ecx
+  38:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  3c:	89 ce                	mov    %ecx,%esi
+  3e:	48 89 c7             	mov    %rax,%rdi
+  41:	e8 00 00 00 00       	call   46 <main+0x46>
+  46:	48 85 c0             	test   %rax,%rax
+  49:	75 07                	jne    52 <main+0x52>
+  4b:	b8 01 00 00 00       	mov    $0x1,%eax
+  50:	eb 52                	jmp    a4 <main+0xa4>
+  52:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  56:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  5a:	eb 1f                	jmp    7b <main+0x7b>
+  5c:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  60:	0f b6 00             	movzbl (%rax),%eax
+  63:	3c 2f                	cmp    $0x2f,%al
+  65:	7e 0f                	jle    76 <main+0x76>
+  67:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  6b:	0f b6 00             	movzbl (%rax),%eax
+  6e:	3c 39                	cmp    $0x39,%al
+  70:	7f 04                	jg     76 <main+0x76>
+  72:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+  76:	48 83 45 f0 01       	addq   $0x1,-0x10(%rbp)
+  7b:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  7f:	0f b6 00             	movzbl (%rax),%eax
+  82:	84 c0                	test   %al,%al
+  84:	75 d6                	jne    5c <main+0x5c>
+  86:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  89:	89 c6                	mov    %eax,%esi
+  8b:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 92 <main+0x92>
+  92:	48 89 c7             	mov    %rax,%rdi
+  95:	b8 00 00 00 00       	mov    $0x0,%eax
+  9a:	e8 00 00 00 00       	call   9f <main+0x9f>
+  9f:	b8 00 00 00 00       	mov    $0x0,%eax
+  a4:	c9                   	leave  
+  a5:	c3                   	ret    

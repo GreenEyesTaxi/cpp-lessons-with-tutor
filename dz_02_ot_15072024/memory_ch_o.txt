@@ -1,0 +1,80 @@
+memory_ch.o:     формат файла elf64-x86-64
+
+
+Дизассемблирование раздела .text:
+
+0000000000000000 <main>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	48 83 ec 40          	sub    $0x40,%rsp
+   c:	48 c7 45 e0 64 00 00 	movq   $0x64,-0x20(%rbp)
+  13:	00 
+  14:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  18:	48 89 c7             	mov    %rax,%rdi
+  1b:	e8 00 00 00 00       	call   20 <main+0x20>
+  20:	48 89 45 d8          	mov    %rax,-0x28(%rbp)
+  24:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+  2b:	48 b8 2e 2c 3a 3b 3f 	movabs $0x2928213f3b3a2c2e,%rax
+  32:	21 28 29 
+  35:	48 89 45 ce          	mov    %rax,-0x32(%rbp)
+  39:	66 c7 45 d6 5b 5d    	movw   $0x5d5b,-0x2a(%rbp)
+  3f:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%rbp)
+  46:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 4d <main+0x4d>
+  4d:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  51:	89 c1                	mov    %eax,%ecx
+  53:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  57:	89 ce                	mov    %ecx,%esi
+  59:	48 89 c7             	mov    %rax,%rdi
+  5c:	e8 00 00 00 00       	call   61 <main+0x61>
+  61:	48 85 c0             	test   %rax,%rax
+  64:	75 0a                	jne    70 <main+0x70>
+  66:	b8 01 00 00 00       	mov    $0x1,%eax
+  6b:	e9 9b 00 00 00       	jmp    10b <main+0x10b>
+  70:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  74:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  78:	eb 4f                	jmp    c9 <main+0xc9>
+  7a:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  7e:	0f b6 00             	movzbl (%rax),%eax
+  81:	3c 2f                	cmp    $0x2f,%al
+  83:	7e 11                	jle    96 <main+0x96>
+  85:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  89:	0f b6 00             	movzbl (%rax),%eax
+  8c:	3c 39                	cmp    $0x39,%al
+  8e:	7f 06                	jg     96 <main+0x96>
+  90:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+  94:	eb 2e                	jmp    c4 <main+0xc4>
+  96:	c7 45 ec 00 00 00 00 	movl   $0x0,-0x14(%rbp)
+  9d:	eb 1d                	jmp    bc <main+0xbc>
+  9f:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  a3:	0f b6 10             	movzbl (%rax),%edx
+  a6:	8b 45 ec             	mov    -0x14(%rbp),%eax
+  a9:	48 98                	cltq   
+  ab:	0f b6 44 05 ce       	movzbl -0x32(%rbp,%rax,1),%eax
+  b0:	38 c2                	cmp    %al,%dl
+  b2:	75 04                	jne    b8 <main+0xb8>
+  b4:	83 45 f8 01          	addl   $0x1,-0x8(%rbp)
+  b8:	83 45 ec 01          	addl   $0x1,-0x14(%rbp)
+  bc:	8b 45 ec             	mov    -0x14(%rbp),%eax
+  bf:	83 f8 09             	cmp    $0x9,%eax
+  c2:	76 db                	jbe    9f <main+0x9f>
+  c4:	48 83 45 f0 01       	addq   $0x1,-0x10(%rbp)
+  c9:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  cd:	0f b6 00             	movzbl (%rax),%eax
+  d0:	84 c0                	test   %al,%al
+  d2:	75 a6                	jne    7a <main+0x7a>
+  d4:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  d7:	89 c6                	mov    %eax,%esi
+  d9:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # e0 <main+0xe0>
+  e0:	48 89 c7             	mov    %rax,%rdi
+  e3:	b8 00 00 00 00       	mov    $0x0,%eax
+  e8:	e8 00 00 00 00       	call   ed <main+0xed>
+  ed:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  f0:	89 c6                	mov    %eax,%esi
+  f2:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # f9 <main+0xf9>
+  f9:	48 89 c7             	mov    %rax,%rdi
+  fc:	b8 00 00 00 00       	mov    $0x0,%eax
+ 101:	e8 00 00 00 00       	call   106 <main+0x106>
+ 106:	b8 00 00 00 00       	mov    $0x0,%eax
+ 10b:	c9                   	leave  
+ 10c:	c3                   	ret   
