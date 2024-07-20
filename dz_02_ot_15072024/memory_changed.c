@@ -18,7 +18,7 @@ int main()
 		    ndigits++;
         else {// я не понимаю, как сюда подтянуть правильно те самые ASCII
             for (int i = 0; i < sizeof(marks); i++) {
-                if (marks[i] == buf[*p]){
+                if (*p == marks[i]){
                     nmarks++;  
                 }
             }
