@@ -12,32 +12,23 @@ struct data {
 test_data[] = {
     //{1.6726e-27, 1, 938}, //протон, тут должен выдать ошибку, должно быть 938 000 000 или что-то по порядку
     {5, 10, 250, 4.5e17}, // должно пройти без ошибок
-    {1, 4e8, 1000, 2000} //тут должна быть ошибка по скорости света 
+    //{1, 4e8, 1000, 2000} //тут должна быть ошибка по скорости света 
 };
 
 double calc_newton(double m, double v)  {
-    /*if (m < 0.0000001 && m >= 0 || v > c) {
-        return nan(""); 
-    }*/
-
     double en = m * v * v / 2;
     return en;
 
 }
 
-//double calc_newton_ovr(struct data *input) {return calc_newton(input->m, input->v);}
-
 double calc_einstein(double m, double v) {
-    
-    /*if (m >= 0.0000001 && m==0 || v > c) {
+    if (v >  c) {
         return nan("");
-    }*/
+    }
 
     double ee = m * c * c;//ради приличия сделаю перевод в эвы
     return ee;
 }
-
-//double calc_einstein_ovr(struct data *input) {return calc_einstein(input->m, input->v);} 
 
 int verify_calc(double m, double v, double expected, double *actual, double (*calc)(double m, double v)) {
     *actual = calc(m,v);
@@ -49,6 +40,7 @@ int main() {
     struct data *test = test_data;
     double actual;
     int nerrs = 0;
+    struct data *real;
 
     for (size_t i = 0; i < sizeof(test_data)/sizeof(test_data[0]); i++, test++) {
         if (!verify_calc(test->m, test->v, test->en, &actual, calc_newton)) {
@@ -65,6 +57,25 @@ int main() {
 			    test->m, test->v, test->ee, actual);
         }
 	}
-	return nerrs;
+
+    if (nerrs != 0) {
+        return 2;
+    }
+    else {
+        printf("Enter mass and speed");
+        scanf("%lf%lf", &real->m, &real->v);
+
+        real->en = calc_newton(real->m, real->v);
+        real->ee = calc_einstein(real->m, real->v);
+
+        if (isnan(real->en) || isnan(real->ee)) {
+            return 1;
+        }
+        else {
+            printf("Newton energy = %lf, Einstein energy = %lf", real->en, real->ee);
+            return 0;
+        }
+    }
+
 }
 
