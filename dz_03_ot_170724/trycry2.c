@@ -40,7 +40,7 @@ int main() {
     struct data *test = test_data;
     double actual;
     int nerrs = 0;
-    struct data *real;
+    struct data real;
 
     for (size_t i = 0; i < sizeof(test_data)/sizeof(test_data[0]); i++, test++) {
         if (!verify_calc(test->m, test->v, test->en, &actual, calc_newton)) {
@@ -62,17 +62,17 @@ int main() {
         return 2;
     }
     else {
-        printf("Enter mass and speed");
-        scanf("%lf%lf", &real->m, &real->v);
+        printf("Enter mass and speed:\t");
+        scanf("%lf%lf", &real.m, &real.v);
 
-        real->en = calc_newton(real->m, real->v);
-        real->ee = calc_einstein(real->m, real->v);
+        real.en = calc_newton(real.m, real.v);
+        real.ee = calc_einstein(real.m, real.v);
 
-        if (isnan(real->en) || isnan(real->ee)) {
+        if (isnan(real.en) || isnan(real.ee)) {
             return 1;
         }
         else {
-            printf("Newton energy = %lf, Einstein energy = %lf", real->en, real->ee);
+            printf("Newton energy = %lf, Einstein energy = %lf\n", real.en, real.ee);
             return 0;
         }
     }
