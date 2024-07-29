@@ -33,9 +33,10 @@ double calc_einstein(double m, double v) {
 
 int verify_calc(double m, double v, double expected, double *actual, double (*calc)(double m, double v)) {
     *actual = calc(m,v);
+    double error_actual = fmod(*actual, expected);
 
     if (isnan(expected)) {
-        return nan("");
+        return NAN;
     }
     
     else {
@@ -43,7 +44,7 @@ int verify_calc(double m, double v, double expected, double *actual, double (*ca
             return 0;
         }
 
-        else if (fmod(*actual, expected) <= error_rate){
+        else if ( error_actual <= error_rate){
             return 1;
         }
         
