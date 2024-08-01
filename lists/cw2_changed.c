@@ -45,7 +45,7 @@ int insert_item_between(struct item *item_to_insert, struct item *previous, stru
 
 	item_to_insert->next = following;
 	previous->next = item_to_insert;
-    
+    return 1;
 }
 
 int insert_item_back(struct item *item_to_insert, struct sample *data_insert) {
@@ -63,6 +63,7 @@ int insert_item_back(struct item *item_to_insert, struct sample *data_insert) {
 	if (prev == NULL) {
 		prev->next = item_to_insert;
 	}
+	return 1;
 }
 
 int main(int argc, char **argv) {
