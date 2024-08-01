@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -49,9 +48,7 @@ int insert_item_between(struct sample *item_to_insert, struct sample *previous, 
     	else {
         	return 1;//success
     	}
-	}
-
-    
+	}    
 } 
 
 int insert_item_back(struct sample *item_to_insert, time_t some_timestamp, double some_value) {
@@ -100,12 +97,15 @@ int main(int argc, char **argv) {
 
 	// insert into list
 	struct sample *s12;
+	struct sample *s3;
     time_t timestamp_insert;
     double value_insert;
 
     scanf("%ti%lf", &timestamp_insert, &value_insert);
 	
     insert_item_between(s12, s1, s2, timestamp_insert, value_insert);
+	insert_item_back(s12, timestamp_insert, value_insert);
+	insert_item_back(s3, timestamp_insert, value_insert);
 
 	print_list(head);
 
