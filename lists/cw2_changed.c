@@ -39,31 +39,41 @@ int delete_item(struct item *item_to_delete) {
 	return 1;
 }
 
-int insert_item_between(struct item *item_to_insert, struct item *previous, struct item *following, struct sample *data_insert) {
+int insert_item_between(struct item *item_to_insert, struct item *previous, struct sample *data_insert) {
 	item_to_insert = calloc(1, sizeof(struct item));
 	item_to_insert->data = data_insert;
 
-	item_to_insert->next = following;
-	previous->next = item_to_insert;
+	if (item_to_insert == NULL) {
+		return 0;
+	}
+
+	if (previous == NULL) {
+		item_to_insert->next = head;
+		head = item_to_insert;
+	} else {
+		if (previous->next == NULL) {//вставка в конец
+			struct item *current = head; 
+
+			if (current == NULL) {
+				current->next = item_to_insert;
+			}
+			else {
+				while (current->next != NULL) {
+				current = current->next;
+				}
+
+				current->next = item_to_insert;
+				item_to_insert->next = NULL;
+			}
+		}
+		else {//вставка в середину 
+			item_to_insert->next = previous->next;
+			previous->next = item_to_insert;
+		}
+	}
+
+	
     return 1;
-}
-
-int insert_item_back(struct item *item_to_insert, struct sample *data_insert) {
-	item_to_insert = calloc(1, sizeof(struct item));
-	item_to_insert->data = data_insert;
-
-	item_to_insert->next = NULL;
-
-	struct item *prev = head;
-
-	while (prev != NULL) {
-		prev = prev->next;
-	}
-		
-	if (prev == NULL) {
-		prev->next = item_to_insert;
-	}
-	return 1;
 }
 
 int main(int argc, char **argv) {
@@ -80,38 +90,49 @@ int main(int argc, char **argv) {
 
 	struct item *item2 = calloc(1, sizeof(struct item));
 	item2->data = s2;
-	item2->next = item1;
+	item1->next = item2;
 
-	head = item2;
-
-	print_list(head);
+	head = item1;
 
 	// insert into list
-	struct sample *s12;
-    time_t timestamp_insert;
-    double value_insert;
+	struct sample *s12= malloc(sizeof(struct sample));
+    time_t timestamp_insert12;
+    double value_insert12;
 
-    scanf("%ti%lf", &timestamp_insert, &value_insert);
+    scanf("%ti%lf", &timestamp_insert12, &value_insert12);
 
-	s12->timestamp = timestamp_insert;
-	s12->value = value_insert;
+	s12->timestamp = timestamp_insert12;
+	s12->value = value_insert12;
+
+	struct sample *s3 = malloc(sizeof(struct sample));
+    time_t timestamp_insert3;
+    double value_insert3;
+
+    scanf("%ti%lf", &timestamp_insert3, &value_insert3);
+
+	s3->timestamp = timestamp_insert3;
+	s3->value = value_insert3;
+
+	struct sample *s4 = malloc(sizeof(struct sample));
+    time_t timestamp_insert4;
+    double value_insert4;
+
+    scanf("%ti%lf", &timestamp_insert4, &value_insert4);
+
+	s4->timestamp = timestamp_insert4;
+	s4->value = value_insert4;
 
 	struct item *item12;
 	struct item *item3;
+	struct item *item4;
 
-	insert_item_between(item12, item1, item2, s12);
-	insert_item_back(item12, s12);
-	insert_item_back(item3, s12);
+	insert_item_between(item12, item1, s12);
+	insert_item_between(item3, item2, s3);
+	insert_item_between(item4, NULL, s4);
 	
 	print_list(head);
 
-	if (delete_item(item2) == 0)
-		fprintf(stderr, "delete(item2) failed\n");
-	print_list(head);
-
-	if (delete_item(item1) == 0)
-		fprintf(stderr, "delete(item1) failed\n");
-	print_list(head);
+	delete_item(head);
 
 	return 0;
 }
