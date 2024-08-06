@@ -133,6 +133,7 @@ int main(int argc, char **argv) {
 	print_list(head);
 
 	delete_item(head);
+	print_list(head);
 
 	return 0;
 }
