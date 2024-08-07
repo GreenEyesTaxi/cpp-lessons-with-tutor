@@ -41,11 +41,12 @@ int delete_item(struct item *item_to_delete) {
 
 int insert_item_between(struct item *item_to_insert, struct item *previous, struct sample *data_insert) {
 	item_to_insert = calloc(1, sizeof(struct item));
-	item_to_insert->data = data_insert;
-
+	
 	if (item_to_insert == NULL) {
 		return 0;
 	}
+
+	item_to_insert->data = data_insert;
 
 	if (previous == NULL) {
 		item_to_insert->next = head;
