@@ -55,6 +55,22 @@ struct tree_item* add_tree_item(struct tree_item *root, const char *regnum, cons
 	}
 }
 
+void delete_tree_item(struct tree_item *item) {
+	// если есть потомки, то один из них должен встать на наше место
+}
+
+int delete_tree_item_by_key(const char *regnum) {
+	// 0 if OK, -1 if not found
+	// calls delete_tree_item()
+}
+
+struct tree_item* search_tree(struct tree_item *root, const char *regnum) {
+	// return NULL if such key doesn't exist, or pointer to tree item if it exists
+}
+
+void print_tree(const struct tree_item *root) {
+}
+
 int main(int argc, char **argv) {
 	struct tree_item *root, *item;
 	struct car car;
@@ -62,6 +78,7 @@ int main(int argc, char **argv) {
 	strncpy(car.vin, "1234567890", sizeof(car.vin));
 	strncpy(car.owner, "Vasiliy Vasilyev", sizeof(car.owner));
 	root = add_tree_item(NULL, "a123bc", &car);
-	printf("root is 0x%p\n", root);
+
+	print_tree(root);
 	return 0;
 }
