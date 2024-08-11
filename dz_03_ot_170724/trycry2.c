@@ -17,6 +17,10 @@ test_data[] = {
 };
 
 double calc_newton(double m, double v)  {
+    if (v >  c) {
+        return nan("");
+    }
+
     double en = m * v * v / 2;
     return en;
 
@@ -33,22 +37,28 @@ double calc_einstein(double m, double v) {
 
 int verify_calc(double m, double v, double expected, double *actual, double (*calc)(double m, double v)) {
     *actual = calc(m,v);
-    double error_actual = fmod(*actual, expected);
+    double error_actual = fabs(*actual - expected);
+    int ret;
 
     if (isnan(expected)) {
-        return NAN;
+        if (isnan(*actual)) {
+            ret = 1;
+        }
+        else {
+            ret = 0;
+        }
     }
     
     else {
-        if (*actual != expected) { 
-            return 0;
+        if (error_actual <= error_rate) { 
+            ret = 1;
         }
 
-        else if ( error_actual <= error_rate){
-            return 1;
+        else {
+            ret = 0;
         }
-        
     }
+    return ret;
 }    
 
 int main() {
