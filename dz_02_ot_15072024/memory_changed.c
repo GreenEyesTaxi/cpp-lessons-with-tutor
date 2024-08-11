@@ -14,9 +14,11 @@ int main()
 		return 1;
 
 	for (char *p = buf; *p; p++) {//видимо, все еще не до конца понимаю эту строчку
-		if (*p >= '0' && *p <= '9')
-		    ndigits++;
-        else {// я не понимаю, как сюда подтянуть правильно те самые ASCII
+		if (*p >= '0' && *p <= '9') {
+			ndigits++;
+		}
+		    
+		else { // я не понимаю, как сюда подтянуть правильно те самые ASCII
             for (int i = 0; i < sizeof(marks); i++) {
                 if (*p == marks[i]){
                     nmarks++;  

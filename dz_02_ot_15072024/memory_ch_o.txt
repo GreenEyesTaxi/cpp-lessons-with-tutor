@@ -7,7 +7,7 @@ memory_ch.o:     формат файла elf64-x86-64
    0:	f3 0f 1e fa          	endbr64 
    4:	55                   	push   %rbp
    5:	48 89 e5             	mov    %rsp,%rbp
-   8:	48 83 ec 40          	sub    $0x40,%rsp
+   8:	48 83 ec 40          	sub    $0x40,%rsp           #выделено в 2 раза больше памати исходя из удобства процессора (чтобы адрес был кратен какому-нибудь числу)
    c:	48 c7 45 e0 64 00 00 	movq   $0x64,-0x20(%rbp)
   13:	00 
   14:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
@@ -49,7 +49,7 @@ memory_ch.o:     формат файла elf64-x86-64
   9f:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   a3:	0f b6 10             	movzbl (%rax),%edx
   a6:	8b 45 ec             	mov    -0x14(%rbp),%eax
-  a9:	48 98                	cltq   
+  a9:	48 98                	cltq                           # для конвертации значений 32 битных в 64 битные  
   ab:	0f b6 44 05 ce       	movzbl -0x32(%rbp,%rax,1),%eax
   b0:	38 c2                	cmp    %al,%dl
   b2:	75 04                	jne    b8 <main+0xb8>
