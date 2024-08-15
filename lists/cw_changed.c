@@ -107,13 +107,14 @@ int main(int argc, char **argv) {
 
 	print_list(head);
 	
-	if (delete_item(s2) == 0)
+	delete_item(head);
+	/*if (delete_item(s2) == 0)
 		fprintf(stderr, "delete(s2) failed\n");
-	print_list(head);
+	//print_list(head);
 
 	if (delete_item(s1) == 0)
 		fprintf(stderr, "delete(s1) failed\n");
-	print_list(head);
+	//print_list(head);*/
 
 	return 0;
 }
