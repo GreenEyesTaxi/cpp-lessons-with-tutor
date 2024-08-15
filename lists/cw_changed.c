@@ -10,10 +10,15 @@ struct sample {
 };
 struct sample *head;
 
+void print_item(struct sample *item_to_print) {
+	printf("registered event at %lld: %f\n", (long long)item_to_print->timestamp, item_to_print->value);
+}
+
+
 void print_list(struct sample *head) {
 	// iterate through list
 	for (struct sample *s = head; s; s = s->next) {
-		printf("registered event at %lld: %f\n", (long long)s->timestamp, s->value);
+		print_item(s);
 	}
 	puts("");
 }
