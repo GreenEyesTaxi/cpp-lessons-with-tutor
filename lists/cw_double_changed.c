@@ -10,10 +10,14 @@ struct sample {
 };
 struct sample *head, *tail;
 
+void print_item(struct sample *item_to_print) {
+	printf("registered event at %lld: %f\n", (long long)item_to_print->timestamp, item_to_print->value);
+}
+
 void print_list(struct sample *head) {
 	// iterate through list
 	for (struct sample *s = head; s; s = s->next) {
-		printf("registered event at %lld: %f\n", (long long)s->timestamp, s->value);
+		print_item(s);
 	}
 	puts("");
 }
@@ -21,7 +25,7 @@ void print_list(struct sample *head) {
 void print_list_reversed(struct sample *tail) {	
 	// iterate through list
 	for (struct sample *s = tail; s; s = s->prev) {
-		printf("registered event at %lld: %f\n", (long long)s->timestamp, s->value);
+		print_item(s);
 	}
 	puts("");
 }
@@ -38,6 +42,20 @@ int delete_item(struct sample *item_to_delete) {
 		tail = item_to_delete->prev;
 
 	free(item_to_delete);
+	return 1;
+}
+
+int delete_list_to_end(struct sample *item_to_delete_from) {
+	for (struct sample *s = item_to_delete_from; s; s = s->next) {
+		delete_item(s);
+	}
+	return 1;
+}
+
+int delete_list_to_begin(struct sample *item_to_delete_from) {
+	for (struct sample *s = item_to_delete_from; s; s = s->prev) {
+		delete_item(s);
+	}
 	return 1;
 }
 
@@ -60,16 +78,29 @@ int insert_item(struct sample *item_to_insert, struct sample *previous) {
 			tail = item_to_insert;			
 		}
 		else {//вставка в середину 
-			
 			previous->next->prev = item_to_insert;
 			item_to_insert->prev = previous;
 			item_to_insert->next = previous->next;
 			previous->next = item_to_insert;
-			
-			
 		}
 	}
 
+	return 1;
+}
+
+int insert_item_back(struct sample *item_to_insert) { 
+	item_to_insert->next = NULL;
+	tail->next = item_to_insert;
+	item_to_insert->prev = tail;
+	tail = item_to_insert;
+	return 1;
+}
+
+int insert_item_front(struct sample *item_to_insert) {
+	item_to_insert->prev = NULL;
+	head->prev = item_to_insert;
+	item_to_insert->next = head;
+	head = item_to_insert;
 	return 1;
 }
 
@@ -104,6 +135,14 @@ int main(int argc, char **argv) {
 	s4->timestamp = 4444444444;
 	s4->value = 4444;
 
+	struct sample *s5 = malloc(sizeof(struct sample));
+	s5->timestamp = 55555555555;
+	s5->value = 5555;
+
+	struct sample *s6 = malloc(sizeof(struct sample));
+	s6->timestamp = 66666666666;
+	s6->value = 6666;
+
 	insert_item(s12, s1);//middle
 	insert_item(s3, NULL);//front
 	insert_item(s4, s2);//back
@@ -111,15 +150,25 @@ int main(int argc, char **argv) {
 	print_list(head);
 	print_list_reversed(tail);
 
-	//functions for check
-	
-	delete_item(head);
+	insert_item_back(s5);
 	print_list(head);
 	print_list_reversed(tail);
 
-	delete_item(tail);
+	insert_item_front(s6);
 	print_list(head);
 	print_list_reversed(tail);
+
+	//functions for check
+	
+	delete_list_to_end(s2);
+	print_list(head);
+	print_list_reversed(tail);
+
+	delete_list_to_begin(s1);
+	print_list(head);
+	print_list_reversed(tail);
+
+	delete_list_to_end(head);
 
 	return 0;
 }
