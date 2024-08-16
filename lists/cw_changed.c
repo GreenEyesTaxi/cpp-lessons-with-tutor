@@ -39,8 +39,8 @@ int delete_item(struct sample *item_to_delete) {
 	return 1;
 }
 
-int delete_list(struct sample *item_to_delete) {
-	for (struct sample *s = item_to_delete; s; s = s->next) {
+int delete_list(struct sample *item_to_delete_from) {
+	for (struct sample *s = item_to_delete_from; s; s = s->next) {
 		delete_item(s);
 	}
 	return 1;
