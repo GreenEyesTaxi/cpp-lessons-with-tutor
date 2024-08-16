@@ -118,12 +118,12 @@ int insert_item_front(struct sample *item_to_insert) {
 
 int main(int argc, char **argv) {
 	struct sample *s1 = malloc(sizeof(struct sample));
-	s1->timestamp = 12345678;
-	s1->value = 123;
+	s1->timestamp = 11111111;
+	s1->value = 1111;
 
 	struct sample *s2 = malloc(sizeof(struct sample));
-	s2->timestamp = 12345978;
-	s2->value = 234;
+	s2->timestamp = 22222222;
+	s2->value = 2222;
 
 	head = s1;
 	s1->prev = NULL;
@@ -136,23 +136,23 @@ int main(int argc, char **argv) {
 
 	//data for check 
 	struct sample *s12 = malloc(sizeof(struct sample));
-	s12->timestamp = 1212121212;
+	s12->timestamp = 12121212;
 	s12->value = 1212;
 
 	struct sample *s3 = malloc(sizeof(struct sample));
-	s3->timestamp = 3333333333;
+	s3->timestamp = 33333333;
 	s3->value = 3333;
 
 	struct sample *s4 = malloc(sizeof(struct sample));
-	s4->timestamp = 4444444444;
+	s4->timestamp = 44444444;
 	s4->value = 4444;
 
 	struct sample *s5 = malloc(sizeof(struct sample));
-	s5->timestamp = 55555555555;
+	s5->timestamp = 55555555;
 	s5->value = 5555;
 
 	struct sample *s6 = malloc(sizeof(struct sample));
-	s6->timestamp = 66666666666;
+	s6->timestamp = 66666666;
 	s6->value = 6666;
 
 	insert_item(s12, s1);//middle

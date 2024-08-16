@@ -80,7 +80,7 @@ int insert_item_back(struct sample *item_to_insert) {
 	struct sample *current = head; 
 
 	if (current == NULL) {
-		current->next = item_to_insert;
+		current = item_to_insert;
 	}
 	else {
 		while (current->next != NULL) {
@@ -107,12 +107,12 @@ int insert_item_front(struct sample *item_to_insert) {
 
 int main(int argc, char **argv) {
 	struct sample *s1 = malloc(sizeof(struct sample));
-	s1->timestamp = 12345678;
-	s1->value = 123;
+	s1->timestamp = 11111111;
+	s1->value = 1111;
 
 	struct sample *s2 = malloc(sizeof(struct sample));
-	s2->timestamp = 12345978;
-	s2->value = 234;
+	s2->timestamp = 22222222;
+	s2->value = 2222;
 
 	head = s1;
 	s1->next = s2;
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
 
 	// insert into list
 	struct sample *s12 = malloc(sizeof(struct sample));
-	s12->timestamp = 1212121212;
+	s12->timestamp = 12121212;
 	s12->value = 1212;
 
 	struct sample *s3 = malloc(sizeof(struct sample));
