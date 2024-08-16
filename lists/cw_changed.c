@@ -93,6 +93,18 @@ int insert_item_back(struct sample *item_to_insert) {
 	return 1;
 }
 
+int insert_item_front(struct sample *item_to_insert) {
+	for (struct sample *compare = head; compare; compare = compare->next) {
+		if (compare == item_to_insert) {
+        	return 0;//fail
+    	}
+	}
+
+	item_to_insert->next = head;
+	head = item_to_insert;
+	return 1;
+}
+
 int main(int argc, char **argv) {
 	struct sample *s1 = malloc(sizeof(struct sample));
 	s1->timestamp = 12345678;
@@ -122,6 +134,10 @@ int main(int argc, char **argv) {
 	struct sample *s5 = malloc(sizeof(struct sample));
 	s5->timestamp = 555555555;
 	s5->value = 5555;
+
+	struct sample *s6 = malloc(sizeof(struct sample));
+	s6->timestamp = 66666666666;
+	s6->value = 6666;
 	
     insert_item(s12, s1); //между s1 и s2
 	insert_item(s3, s2);//в конец
@@ -132,6 +148,9 @@ int main(int argc, char **argv) {
 	insert_item_back(s5);
 	print_list(head);
 
+	insert_item_front(s6);
+	print_list(head);
+
 	if (delete_item(s2) == 0)
 		fprintf(stderr, "delete(s2) failed\n");
 	print_list(head);
@@ -139,5 +158,7 @@ int main(int argc, char **argv) {
 	if (delete_list(s12) == 0)
 		fprintf(stderr, "delete list failed\n");
 	print_list(head);
+
+	delete_list(head);
 	return 0;
 }

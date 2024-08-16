@@ -89,6 +89,12 @@ int insert_item(struct sample *item_to_insert, struct sample *previous) {
 }
 
 int insert_item_back(struct sample *item_to_insert) { 
+	for (struct sample *compare = head; compare; compare = compare->next) {
+		if (compare == item_to_insert) {
+        	return 0;//fail
+    	}
+	}
+
 	item_to_insert->next = NULL;
 	tail->next = item_to_insert;
 	item_to_insert->prev = tail;
@@ -97,6 +103,12 @@ int insert_item_back(struct sample *item_to_insert) {
 }
 
 int insert_item_front(struct sample *item_to_insert) {
+	for (struct sample *compare = head; compare; compare = compare->next) {
+		if (compare == item_to_insert) {
+        	return 0;//fail
+    	}
+	}
+
 	item_to_insert->prev = NULL;
 	head->prev = item_to_insert;
 	item_to_insert->next = head;
