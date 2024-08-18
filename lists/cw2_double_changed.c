@@ -49,16 +49,22 @@ int delete_item(struct item *item_to_delete) {
 	return 1;
 }
 
-int delete_list_to_end(struct item *item_to_delete_from) {
-	for (struct item *it = item_to_delete_from; it; it = it->next) {
-		delete_item(it);
+int delete_list_to_end(struct item *item_to_delete_from){
+	struct item *current = item_to_delete_from;
+	while (current != NULL) {
+		struct item *temp = current;
+		current = current->next;
+		delete_item(temp);
 	}
 	return 1;
 }
 
-int delete_list_to_begin(struct item *item_to_delete_from) {
-	for (struct item *it = item_to_delete_from; it; it = it->prev) {
-		delete_item(it);
+int delete_list_to_begin(struct item *item_to_delete_from){
+	struct item *current = item_to_delete_from;
+	while (current != NULL) {
+		struct item *temp = current;
+		current = current->prev;
+		delete_item(temp);
 	}
 	return 1;
 }

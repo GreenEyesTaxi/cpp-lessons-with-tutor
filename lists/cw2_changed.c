@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,8 +44,11 @@ int delete_item(struct item *item_to_delete) {
 }
 
 int delete_list(struct item *item_to_delete_from){
-	for (struct item *s = item_to_delete_from; s; s = s->next) {
-		delete_item(s);
+	struct item *current = item_to_delete_from;
+	while (current != NULL) {
+		struct item *temp = current;
+		current = current->next;
+		delete_item(temp);
 	}
 	return 1;
 }
