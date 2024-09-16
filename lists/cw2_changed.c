@@ -53,26 +53,26 @@ int delete_list(struct item *item_to_delete_from){
 	return 1;
 }
 
-int insert_item(struct item *item_to_insert, struct item *previous, struct sample *data_insert) {
-	item_to_insert = calloc(1, sizeof(struct item));
+int insert_item(struct item **item_to_insert, struct item *previous, struct sample *data_insert) {
+	*item_to_insert = calloc(1, sizeof(struct item));//разыменнованный двойной указатель 
 	
 	if (item_to_insert == NULL) {
 		return 0;
 	}
 
-	item_to_insert->data = data_insert;
+	(*item_to_insert)->data = data_insert;
 
 	if (previous == NULL) {//вставка в начало
-		item_to_insert->next = head;
-		head = item_to_insert;
+		(*item_to_insert)->next = head;
+		head = *item_to_insert;
 	} else {
 		if (previous->next == NULL) {//вставка в конец
-			previous->next = item_to_insert;
-			item_to_insert->next = NULL;
+			previous->next = *item_to_insert;
+			(*item_to_insert)->next = NULL;
 		}
 		else {//вставка в середину 
-			item_to_insert->next = previous->next;
-			previous->next = item_to_insert;
+			(*item_to_insert)->next = previous->next;
+			previous->next = *item_to_insert;
 		}
 	}
 	
@@ -165,9 +165,9 @@ int main(int argc, char **argv) {
 	struct item *item5;
 	struct item *item6;
 
-	insert_item(item12, item1, s12);
-	insert_item(item3, item2, s3);
-	insert_item(item4, NULL, s4);
+	insert_item(&item12, item1, s12);
+	insert_item(&item3, item2, s3);
+	insert_item(&item4, NULL, s4);
 	
 	print_list(head);
 
